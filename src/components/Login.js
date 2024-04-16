@@ -39,7 +39,7 @@ export default function Login() {
 
   return (
     <Card
-      bgcolor="warning"
+      bgcolor="primary"
       header="Log in"
       status={status}
       body={

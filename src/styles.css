@@ -35,3 +35,13 @@
   background-color: rgb(201, 226, 226);
 }
 
+#login-btn, #signup-btn {
+  margin: 3px;
+}
+
+
+#root {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+}

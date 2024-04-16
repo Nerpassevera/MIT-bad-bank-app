@@ -15,13 +15,6 @@ export default function NavBar(){
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="#/CreateAccount">Create Account</a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="#/login/">Login</a>
-            </li>
 
             <li className="nav-item">
               <a className="nav-link" href="#/deposit/">Deposit</a>
@@ -36,9 +29,14 @@ export default function NavBar(){
             </li>
 
           </ul>
-
-          
         </div>
+
+          <div className="navbar-nav nav-btn-div">
+              <a className="btn btn-outline-primary" id='login-btn' type='button' href="#/login/">Login</a>
+
+              <a className="btn btn-outline-success" id='signup-btn' type='button' href="#/CreateAccount">Create Account</a>
+          </div>
+          
       </div>
     </nav>
 

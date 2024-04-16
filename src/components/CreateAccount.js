@@ -66,7 +66,7 @@ export default function CreateAccount() {
 
   return (
     <Card
-      bgcolor="primary"
+      bgcolor="success"
       header="Create Account"
       status={status}
       body={
