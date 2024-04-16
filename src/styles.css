@@ -1,0 +1,37 @@
+.nav-item {
+  margin: auto;
+}
+
+#createStatus {
+  color: red;
+}
+
+#all-data-table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  margin: auto;
+  background-color: darkslategray;
+  padding: 5px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.grid-cell, .grid-header{
+  border-radius: 5px;
+  align-items: center;
+  background-color: azure;
+  margin: 0;
+  padding: 5px;
+  font-size: 1em;
+  
+}
+.grid-cell:hover{
+  background-color: white;
+  color: blue;
+}
+
+.grid-header {
+  background-color: rgb(201, 226, 226);
+}
+

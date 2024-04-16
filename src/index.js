@@ -1,17 +1,62 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Route, Routes, HashRouter } from "react-router-dom";
+import ReactDOM from 'react-dom';
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import AllData from './components/AllData';
+import CreateAccount from "./components/CreateAccount";
+import Deposit from './components/Deposit';
+import Home from './components/Home';
+import Login from './components/Login';
+import Navbar from './components/Navbar';
+import Withdraw from './components/Withdraw';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export const UserContext = React.createContext(null);
+export default function Spa() {
+  return (
+    <>
+      <HashRouter>
+        <UserContext.Provider
+          value={{
+            users: [
+              {
+                name: "abel",
+                email: "abel@mit.edu",
+                password: "secret",
+                balance: 100,
+              },
+              {
+                name: "mira",
+                email: "mira@mit.edu",
+                password: "secret1",
+                balance: 200,
+              },
+              {
+                name: "john",
+                email: "john@mit.edu",
+                password: "secret2",
+                balance: 180,
+              },
+            ],
+            loggedUser: undefined,
+          }}
+        >
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/createaccount/" element={<CreateAccount />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/deposit" element={<Deposit />} />
+            <Route path="/withdraw" element={<Withdraw />} />
+            <Route path="/alldata" element={<AllData />} />
+          </Routes>
+        </UserContext.Provider>
+      </HashRouter>
+    </>
+  );
+}
+
+
+ReactDOM.render(<Spa />, document.getElementById("root"));
+
+
