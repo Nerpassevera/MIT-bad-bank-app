@@ -46,6 +46,11 @@ export default function CreateAccount() {
         .match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
     )
       return false;
+      if ( field === password && password.length < 8) {
+        setStatus("Error: password should be 8 characters or more");
+        setTimeout(() => setStatus(""), 3000);
+        return false;
+      }
     return true;
   }
 
