@@ -12,7 +12,6 @@ export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const ctx = React.useContext(UserContext);
-  console.log("Login module renders");
 
   /**
    * Runs when the loggedUser value in the context changes.
@@ -21,7 +20,6 @@ export default function Login() {
   React.useEffect(() => {
     if (ctx.loggedUser) {
       setShow(false);
-      console.log("Login module: useEffect runs");
     }
   }, [ctx.loggedUser]);
 

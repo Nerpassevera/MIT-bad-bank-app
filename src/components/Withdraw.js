@@ -45,7 +45,6 @@ export default function Withdraw() {
   function handleWithdraw() {
     if (user.balance >= withdraw) {
       user.balance = user.balance - Number(withdraw);
-      console.log(user, typeof user);
       clearForm();
     } else {
       setStatus("Insufficient funds");

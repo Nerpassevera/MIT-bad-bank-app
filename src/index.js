@@ -1,5 +1,5 @@
 import { Route, Routes, HashRouter } from "react-router-dom";
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -57,6 +57,10 @@ export default function Spa() {
 }
 
 
-ReactDOM.render(<Spa />, document.getElementById("root"));
+// ReactDOM.render(<Spa />, document.getElementById("root"));
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<Spa />);
 
 
