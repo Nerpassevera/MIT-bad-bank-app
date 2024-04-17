@@ -46,6 +46,8 @@ export default function Withdraw() {
     if (user.balance >= withdraw) {
       user.balance = user.balance - Number(withdraw);
       clearForm();
+      alert(withdraw + '$ withdrew successfully!');
+
     } else {
       setStatus("Insufficient funds");
       setTimeout(() => setStatus(""), 3500);

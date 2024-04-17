@@ -49,6 +49,7 @@ export default function Deposit() {
   function handleDeposit() {
     user.balance = user.balance + Number(deposit);
     clearForm();
+    alert(deposit + '$ deposited successfully!');
   }
 
   return (

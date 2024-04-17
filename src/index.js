@@ -57,8 +57,6 @@ export default function Spa() {
 }
 
 
-// ReactDOM.render(<Spa />, document.getElementById("root"));
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<Spa />);
