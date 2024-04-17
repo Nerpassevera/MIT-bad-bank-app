@@ -27,10 +27,10 @@ export default function AllData() {
     <h1>
       AllData <br />
       <div id="all-data-table">
-        <h2 className="grid-header">Name</h2>
-        <h2 className="grid-header">Email</h2>
-        <h2 className="grid-header">Password</h2>
-        <h2 className="grid-header">Balance</h2>
+        <h4 className="grid-header">Name</h4>
+        <h4 className="grid-header">Email</h4>
+        <h4 className="grid-header">Password</h4>
+        <h4 className="grid-header">Balance</h4>
         {content}
       </div>
     </h1>
