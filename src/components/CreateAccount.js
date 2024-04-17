@@ -25,15 +25,23 @@ export default function CreateAccount() {
   }
 
   /**
+   * Displays an error message with the given label and clears it after 3 seconds.
+   * @param {string} label - The label for the error message.
+   */
+  function errorMsg(label) {
+    setStatus("Error: " + label);
+    setTimeout(() => setStatus(""), 3000);
+  }
+
+  /**
    * Validates a field based on its value and label.
    * @param {string} field - The value of the field to validate.
    * @param {string} label - The label of the field to validate.
    * @returns {boolean} True if the field is valid, false otherwise.
    */
-  function validate(field, label) {
+  function validate(field) {
     if (!field) {
-      setStatus("Error: " + label);
-      setTimeout(() => setStatus(""), 3000);
+      errorMsg("All fields are requiered");
       return false;
     }
     // Validation for email field
@@ -46,11 +54,10 @@ export default function CreateAccount() {
         .match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
     )
       return false;
-      if ( field === password && password.length < 8) {
-        setStatus("Error: password should be 8 characters or more");
-        setTimeout(() => setStatus(""), 3000);
-        return false;
-      }
+    if (field === password && password.length < 8) {
+      errorMsg("password should be 8 characters or more");
+      return false;
+    }
     return true;
   }
 
@@ -66,8 +73,7 @@ export default function CreateAccount() {
     );
 
     if (condition) {
-      setStatus("Error: user with this email already exists");
-      setTimeout(() => setStatus(""), 3000);
+      errorMsg("user with this email already exists");
       return true;
     }
     return false;
