@@ -2,38 +2,65 @@ import React from "react";
 import Card from "../context.js";
 import { UserContext } from "../index.js";
 
+/**
+ * Represents a login component.
+ * @returns {JSX.Element} The login component.
+ */
 export default function Login() {
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const ctx = React.useContext(UserContext);
-  console.log('Login module renders');
+  console.log("Login module renders");
 
+  /**
+   * Runs when the loggedUser value in the context changes.
+   * If a user is logged in, hides the login component.
+   */
   React.useEffect(() => {
     if (ctx.loggedUser) {
       setShow(false);
-      console.log('Login module: useEffect runs');
-      }
-    }, [ctx.loggedUser])
+      console.log("Login module: useEffect runs");
+    }
+  }, [ctx.loggedUser]);
 
-  function validate(){
+  /**
+   * Handles the logout functionality.
+   * Sets the loggedUser property of the ctx object to undefined and shows a message.
+   */
+  const handleLogOut = () => {
+    ctx.loggedUser = undefined;
+    setShow(true);
+  };
 
-    const emailMatched = ctx.users.filter( item => item.email === email).length === 1;
-    const passwordlMatched = ctx.users.filter( item => item.password === password).length === 1;
+  /**
+   * Validates the email and password entered by the user.
+   * @returns {boolean} True if the email and password are valid, false otherwise.
+   */
+  function validate() {
+    const emailMatched =
+      ctx.users.filter((item) => item.email === email).length === 1;
+    const passwordlMatched =
+      ctx.users.filter((item) => item.password === password).length === 1;
     return emailMatched && passwordlMatched;
   }
-  
+
+  /**
+   * Handles the login button click event.
+   * Validates the login credentials and updates the loggedUser value in the context.
+   * If the credentials are valid, hides the login component.
+   * If the credentials are invalid, displays an error message.
+   */
   function handleLogin() {
-    console.log('Login credentials: ',email, password);
+    console.log("Login credentials: ", email, password);
     if (validate()) {
       ctx.loggedUser = email;
       setStatus("");
       setShow(false);
-    }
-    else {
+    } else {
       setStatus("Email or password is invalid");
-      setTimeout(() => setStatus(''), 3500);
+      setTimeout(() => setStatus(""), 3500);
     }
   }
 
@@ -79,13 +106,17 @@ export default function Login() {
         ) : (
           <>
             <h5>Success</h5>
-            {/* <button type="submit" className="btn btn-light" onClick={clearForm}>
-              Add another user
-            </button> */}
+            <h6>Enjoy your banking!</h6>
+            <br />
+            <h6>
+              Changed your mind? You can
+              <a class="link-dark ms-1" onClick={handleLogOut} role="button">
+                log out here
+              </a>
+            </h6>
           </>
         )
       }
     />
   );
 }
-

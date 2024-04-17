@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import BankLogo from "../BadBank-logo.jpg";
 import { Tooltip } from "bootstrap";
 
+/**
+ * Represents a navigation bar component.
+ * @returns {JSX.Element} The JSX element representing the navigation bar.
+ */
 export default function NavBar() {
-  React.useEffect(() => {
+  useEffect(() => {
+    // Get all elements with data-bs-toggle="tooltip"
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
     );
-    const tooltipList = [...tooltipTriggerList].map(
+    
+    // Create a tooltip for each element
+    [...tooltipTriggerList].map(
       (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
     );
-    return () => {
-      return () => {
-        tooltipTriggerList.forEach((tooltipTriggerEl) => {
-          const tooltip = Tooltip.getInstance(tooltipTriggerEl);
-          if (tooltip) {
-            tooltip.dispose();
-          }
-        });
-      };
-    };
   }, []);
 
   return (
@@ -43,15 +40,15 @@ export default function NavBar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <button
+              <a
                 className="nav-link"
-                href="#"
+                href="#/"
                 data-bs-toggle="tooltip"
                 data-bs-placement="bottom"
                 data-bs-title="Bank app landing page"
               >
                 Home
-              </button>
+              </a>
             </li>
             <li className="nav-item">
               <a
