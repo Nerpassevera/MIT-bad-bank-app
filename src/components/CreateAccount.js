@@ -2,6 +2,10 @@ import React from "react";
 import Card from "../context";
 import { UserContext } from "../index.js";
 
+/**
+ * Represents a component for creating a user account.
+ * @returns {JSX.Element} The JSX element for the CreateAccount component.
+ */
 export default function CreateAccount() {
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState("");
@@ -10,6 +14,9 @@ export default function CreateAccount() {
   const [password, setPassword] = React.useState("");
   const ctx = React.useContext(UserContext);
 
+  /**
+   * Clears the form by resetting the name, email, and password fields and setting show to true.
+   */
   function clearForm() {
     setName("");
     setEmail("");
@@ -17,6 +24,12 @@ export default function CreateAccount() {
     setShow(true);
   }
 
+  /**
+   * Validates a field based on its value and label.
+   * @param {string} field - The value of the field to validate.
+   * @param {string} label - The label of the field to validate.
+   * @returns {boolean} True if the field is valid, false otherwise.
+   */
   function validate(field, label) {
     if (!field) {
       setStatus("Error: " + label);
@@ -30,16 +43,23 @@ export default function CreateAccount() {
       // If email format is correct
       !String(field)
         .toLowerCase()
-        .match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+        .match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
     )
       return false;
     return true;
   }
 
+  /**
+   * Checks if a user with the given email already exists.
+   * @param {string} newUserEmail - The email of the new user to check.
+   * @returns {boolean} True if a user with the given email already exists, false otherwise.
+   */
   const userExists = (newUserEmail) => {
     let condition = Boolean(
-      ctx.users.filter((user) => user.email === newUserEmail.toLowerCase()).length > 0);
-      
+      ctx.users.filter((user) => user.email === newUserEmail.toLowerCase())
+        .length > 0
+    );
+
     if (condition) {
       setStatus("Error: user with this email already exists");
       setTimeout(() => setStatus(""), 3000);
@@ -48,15 +68,16 @@ export default function CreateAccount() {
     return false;
   };
 
+  /**
+   * Handles the create account action by validating the form fields and creating a new user account.
+   */
   function handleCreate() {
-
     if (
       validate(name, "name") &&
       validate(email, "email") &&
       !userExists(email) &&
       validate(password, "password")
     ) {
-
       ctx.users.push({ name, email, password, balance: 100 });
       alert(`Account for user ${name} has been created`);
       clearForm();
