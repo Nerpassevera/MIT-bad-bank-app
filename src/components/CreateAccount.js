@@ -91,6 +91,7 @@ export default function CreateAccount() {
     ) {
       ctx.users.push({ name, email, password, balance: 100 });
       alert(`Account for user ${name} has been created`);
+      ctx.history.push(`Account for ${name} was created`);
       clearForm();
       setShow(false);
     }
