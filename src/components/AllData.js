@@ -12,27 +12,49 @@ export default function AllData() {
 
   // Iterate through each user in the UserContext
   for (const user of ctx.users) {
-    // Iterate through each property of the user object
-    for (const item in user) {
-      // Push a paragraph element with the user's property value to the content array
-      content.push(
-        <p className="grid-cell" key={user.name + "_" + item}>
-          {user[item]}
-        </p>
-      );
-    }
+    content.push(
+      <tr key={ctx.users.indexOf(user)}>
+        <th scope="row">{user.name}</th>
+        <td>{user.email}</td>
+        <td>{user.password}</td>
+        <td>{user.balance}</td>
+      </tr>
+    );
   }
 
+  let history = [];
+  ctx.history.forEach((element) => {
+    history.push(
+      <tr key={ctx.history.indexOf(element) + 'tr'}>
+        <td>{element}</td>
+      </tr>
+    );
+  });
+
   return (
-    <h1>
-      AllData <br />
-      <div id="all-data-table">
-        <h4 className="grid-header">Name</h4>
-        <h4 className="grid-header">Email</h4>
-        <h4 className="grid-header">Password</h4>
-        <h4 className="grid-header">Balance</h4>
-        {content}
-      </div>
-    </h1>
+    <>
+      <h1>
+        AllData <br />
+      </h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Balance</th>
+          </tr>
+        </thead>
+        <tbody>{content}</tbody>
+      </table>
+
+      <h1>
+        Operations history
+        <br />
+      </h1>
+      <table className="table">
+        <tbody>{history}</tbody>
+      </table>
+    </>
   );
 }

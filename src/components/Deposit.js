@@ -1,56 +1,55 @@
-import React from "react";
+import { useContext, useState } from "react";
 import Card from "../context";
 import { UserContext } from "../index.js";
 
 /**
- * Represents a component for deposit functionality.
- * @returns {JSX.Element} The deposit component.
+ * Represents a component for depositing funds into a user's account.
+ * @returns {JSX.Element} The Deposit component.
  */
 export default function Deposit() {
-  const [show, setShow] = React.useState(false);
-  const [deposit, setDeposit] = React.useState("");
-  const [status, setStatus] = React.useState(
+  const [show, setShow] = useState(false);
+  const [deposit, setDeposit] = useState("");
+  const [status, setStatus] = useState(
     "Please log in for managing your account balance"
   );
-  const ctx = React.useContext(UserContext);
+  const ctx = useContext(UserContext);
+  var user = ctx.loggedUser;
 
   /**
-   * Validates the user and updates the show state and status message.
-   * If the user is logged in and show state is false, it sets the show state to true and clears the status message.
-   * If the user does not have a balance property, it sets the balance to 0.
-   * @param {Object} user - The user object.
+   * Validates the user and shows the deposit form if the user is logged in.
    */
-  function validateUser(user) {
-    if (ctx.loggedUser && !show) {
+  function validateUser() {
+    if (user && !show) {
       setShow(true);
       setStatus("");
-      if (!user.hasOwnProperty("balance")) {
-        user.balance = 0;
+
+      if (!user[0].hasOwnProperty("balance")) {
+        user[0].balance = 0;
       }
     }
   }
 
   /**
-   * Clears the deposit form by setting the deposit state to 0.
+   * Clears the deposit form.
    */
   function clearForm() {
     setDeposit(0);
   }
 
-  // Get the user object from the context based on the loggedUser email
-  var user = ctx.users.filter((item) => item.email === ctx.loggedUser)[0];
-
-  // Validate the user
-  validateUser(user);
-
   /**
-   * Handles the deposit action by updating the user's balance and clearing the deposit form.
+   * Handles the deposit action.
    */
   function handleDeposit() {
-    user.balance = user.balance + Number(deposit);
+    user[0].balance = user[0].balance + Number(deposit);
     clearForm();
-    alert(deposit + '$ deposited successfully!');
+    setStatus(`${deposit}$ deposited successfully!`);
+    setTimeout(() => {
+      setStatus("");
+    }, 4000);
+    ctx.history.push(`${user[0].name} deposited $${deposit}`);
   }
+
+  validateUser();
 
   return (
     <Card
@@ -62,7 +61,7 @@ export default function Deposit() {
           <>
             <p style={{ width: "50%", float: "left" }}>Balance</p>
             <p style={{ width: "50%", float: "right" }}>
-              ${user ? user.balance : NaN}
+              ${user[0] ? user[0].balance : NaN}
             </p>
             Deposit amount
             <input

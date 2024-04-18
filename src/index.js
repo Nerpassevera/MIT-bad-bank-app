@@ -39,6 +39,7 @@ export default function Spa() {
               },
             ],
             loggedUser: undefined,
+            history:[]
           }}
         >
           <Navbar />

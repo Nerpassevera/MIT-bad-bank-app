@@ -13,18 +13,18 @@ export default function Withdraw() {
     "Please log in for managing your account balance"
   );
   const ctx = React.useContext(UserContext);
+  var user = ctx.loggedUser;
 
   /**
-   * Validates the user and sets the show state to true if the user is logged in.
-   * @param {object} user - The user object.
+   * Validates the user and updates the component state accordingly.
    */
-  function validateUser(user) {
-    if (ctx.loggedUser && !show) {
+  function validateUser() {
+    if (user && !show) {
       setShow(true);
       setStatus("");
 
-      if (!user.balance) {
-        user.balance = 0;
+      if (!user[0].balance) {
+        user[0].balance = 0;
       }
     }
   }
@@ -36,23 +36,27 @@ export default function Withdraw() {
     setWithdraw(0);
   }
 
-  var user = ctx.users.filter((item) => item.email === ctx.loggedUser)[0];
-  validateUser(user);
-
   /**
    * Handles the withdraw action.
+   * If the user has sufficient funds, the balance is updated and a success message is displayed.
+   * Otherwise, an insufficient funds message is displayed.
    */
   function handleWithdraw() {
-    if (user.balance >= withdraw) {
-      user.balance = user.balance - Number(withdraw);
+    if (user[0].balance >= withdraw) {
+      user[0].balance = user[0].balance - Number(withdraw);
       clearForm();
-      alert(withdraw + '$ withdrew successfully!');
-
+      setStatus(`${withdraw}$ withdrew successfully!`);
+      setTimeout(() => {
+        setStatus("");
+      }, 4000);
+      ctx.history.push(`${user[0].name} withdrew $${withdraw}`);
     } else {
       setStatus("Insufficient funds");
-      setTimeout(() => setStatus(""), 3500);
+      setTimeout(() => setStatus(""), 4000);
     }
   }
+
+  validateUser();
 
   return (
     <Card
@@ -64,7 +68,7 @@ export default function Withdraw() {
           <>
             <p style={{ width: "50%", float: "left" }}>Balance</p>
             <p style={{ width: "50%", float: "right" }}>
-              ${user ? user.balance : NaN}
+              ${user[0] ? user[0].balance : NaN}
             </p>
             Withdraw amount
             <input

@@ -28,6 +28,7 @@ export default function Login() {
    * Sets the loggedUser property of the ctx object to undefined and shows a message.
    */
   const handleLogOut = () => {
+    ctx.history.push(`${ctx.loggedUser[0].name} logged out`);
     ctx.loggedUser = undefined;
     setShow(true);
   };
@@ -53,9 +54,10 @@ export default function Login() {
   function handleLogin() {
     console.log("Login credentials: ", email, password);
     if (validate()) {
-      ctx.loggedUser = email;
+      ctx.loggedUser = ctx.users.filter((user) => user.email === email);
       setStatus("");
       setShow(false);
+      ctx.history.push(`${ctx.loggedUser[0].name} logged into account`);
     } else {
       setStatus("Email or password is invalid");
       setTimeout(() => setStatus(""), 3500);
@@ -108,7 +110,11 @@ export default function Login() {
             <br />
             <h6>
               Changed your mind? You can
-              <a class="link-dark ms-1" onClick={handleLogOut} role="button">
+              <a
+                className="link-dark ms-1"
+                onClick={handleLogOut}
+                role="button"
+              >
                 log out here
               </a>
             </h6>
