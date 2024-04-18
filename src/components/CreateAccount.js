@@ -143,6 +143,7 @@ export default function CreateAccount() {
               type="submit"
               className="btn btn-light"
               onClick={handleCreate}
+              disabled={ true ? (!name && !email && !password) : false}
             >
               Create Account
             </button>
