@@ -52,8 +52,10 @@ export default function CreateAccount() {
       !String(field)
         .toLowerCase()
         .match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
-    )
+    ){
+      errorMsg("email is incorrect");
       return false;
+    }
     if (field === password && password.length < 8) {
       errorMsg("password should be 8 characters or more");
       return false;
@@ -144,7 +146,7 @@ export default function CreateAccount() {
               type="submit"
               className="btn btn-light"
               onClick={handleCreate}
-              disabled={ true ? (!name && !email && !password) : false}
+              disabled={ true ? (!name || !email || !password) : false}
             >
               Create Account
             </button>
