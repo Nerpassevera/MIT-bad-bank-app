@@ -39,7 +39,7 @@ export default function Login() {
    */
   function validate() {
     const emailMatched =
-      ctx.users.filter((item) => item.email === email).length === 1;
+      ctx.users.filter((item) => item.email === email.toLowerCase()).length === 1;
     const passwordlMatched =
       ctx.users.filter((item) => item.password === password).length === 1;
     return emailMatched && passwordlMatched;
@@ -54,7 +54,7 @@ export default function Login() {
   function handleLogin() {
     console.log("Login credentials: ", email, password);
     if (validate()) {
-      ctx.loggedUser = ctx.users.filter((user) => user.email === email);
+      ctx.loggedUser = ctx.users.filter((user) => user.email === email.toLowerCase());
       setStatus("");
       setShow(false);
       ctx.history.push(`${ctx.loggedUser[0].name} logged into account`);

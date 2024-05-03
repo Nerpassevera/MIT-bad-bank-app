@@ -17,6 +17,9 @@ export default function NavBar() {
     [...tooltipTriggerList].map(
       (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
     );
+    return () => {
+      
+    }
   }, []);
 
   return (
