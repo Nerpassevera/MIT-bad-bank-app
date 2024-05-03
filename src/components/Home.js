@@ -13,7 +13,7 @@ export default function Home() {
       header="BadBank Landing Page"
       title="Welcome to the bank"
       text="You can use this bank"
-      body={<img src={BankImg} className="img-fluid" alt="" />}
+      body={<img src={BankImg} className="img-fluid" alt="bank_image" />}
     />
   );
 }
